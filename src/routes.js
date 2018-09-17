@@ -11,7 +11,7 @@ const routes = (
   <Switch>
     <Route component={ Login } exact path="/" />
     <Route component={ Browse } path="/library" />
-    <Route component={ Details } path="/details" />
+    <Route component={ Details } path="/book/:id" />
   </Switch>
   {/* </Provider> */}
   </HashRouter>

@@ -1,32 +1,39 @@
 import React,{Component} from 'react';
-import Details from './Details';
+import {Link} from 'react-router-dom';
+import axios from 'axios';
 class Book extends Component{
-    
-    
-    showDetails=()=>{
-            return(
-                <Details
-                key={this.props.id}
-                image={this.props.image_url}
-                title={this.props.title}
-                details={this.props.description}
-                author={this.props.author}
-                genre={this.props.genre}
-                book={this.props}/>
-            )
+    constructor(){
+        super()
+        this.state={
+            bookDetails:{},
+            
         }
+    }
+    details = () =>{
+        console.log(this.props)
+        let id = this.props.book.id
+        axios.get(`/book/${id}`)
+    }
+    
+    
     render(){
+        let inStock= this.props.in_stock
         return(
                 <div className="book-main">
-                    <div className="browse-inventory">
                         <div className="book-information">
-                            <img src={this.props.image} alt="coverart"/>
-                            <h1>{this.props.title}</h1>
-                            <p>by {this.props.author}</p>
-                            <button onClick={this.showDetails}>Details</button>
+                            <img className='cover'src={this.props.image} alt="coverart"/>
+                            <div className="title-author">
+                            <h1 className='book-title'>{this.props.title}</h1>
+                            <span  className='author'>
+                                <p> by </p> <h6>{this.props.author}</h6>
+                                </span>
+                            </div>
+                            <div className="stock-details">
+                            <p>In Stock:{inStock}{this.props.stock}</p>
+                            <button onClick={this.details}>Details</button>
+                            </div>
                         </div>
                     </div>
-                </div>
             )
         }
 }export default Book;

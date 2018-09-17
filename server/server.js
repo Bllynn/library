@@ -28,18 +28,16 @@ app.use(express.json());
 
 app.use(bypass.byId(1))
 
-
-
-
-
-
+app.use('/assets',express.static('assets'));
 
 app.post('/auth/login', controller.login);
-app.post('/auth/register', controller.createUser);
+app.put('/auth/register', controller.createUser);
 
 app.get('/api/user', controller.getUser);
-app.get('/api/books', controller.getBooks)
-
+app.get('/api/books', controller.getBooks);
+app.delete('/api/book/:id');
+app.get('/api/book/:id', controller.getBookDetails);
+app.get('/auth/logout',controller.logout)
 
 
 

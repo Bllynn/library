@@ -1,6 +1,6 @@
 module.exports = {
     createUser:(req,res)=>{
-        const dbinstance=req.app.get('db')
+        const dbInstance=req.app.get('db')
         const {Username, Password}=req.body
         dbInstance.create_user([Username,Password]).then(user=>{
             req.session.user = user[0].id
@@ -22,7 +22,7 @@ module.exports = {
     getUser: (req, res) => {
         const dbInstance = req.app.get('db');
         if(req.session.user){
-            const userId = req.session.user;
+            const userId = req.session.user
             dbInstance.get_user([userId])
                 .then( user => {
                     res.status(200).send( user )
@@ -43,5 +43,14 @@ module.exports = {
             res.status(500).send({errorMessage:"Oops! Something went wrong. Our engineers have been informed!"});
             console.log(err)
         })
+    },
+    getBookDetails:(req, res)=>{
+        const dbInstance = req.app.get('db');
+        dbInstance.get_book_details(+req.params.id)
+    },
+    logout: (req, res) => {
+        req.session.destroy();
+        console.log('You successfully logged out!')
+        res.status(200).send(req.session);
     }
 }

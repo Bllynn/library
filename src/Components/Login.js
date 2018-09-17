@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import '../Login.css';
+// import '../stylesheets/Login.css';
 import maroonLogo from '../maroonLogo.svg';
 import axios from 'axios';
 
@@ -16,14 +16,28 @@ class Login extends Component{
         let {Username, Password} = this.state
         console.log(this.state)
         axios.post('/auth/login', {Username:Username,Password:Password}).then(response =>{
+            this.props.history.push('/library');
+            }).catch(err=>{
+                console.log("Something went wrong",err)
+        })
+    }
+    registerUser=()=>{
+        let {Username, Password} = this.state
+        console.log(this.state)
+        axios.put('/auth/register', {Username:Username,Password:Password}).then(response =>{
             this.setState({
                 Username:'',
                 Password:''
             })
             this.props.history.push('/library');
             }).catch(err=>{
-                console.log("Something went wrong",err)
+                console.log("OH NO! Something went terribly wrong!",err)
         })
+    }
+    onEnter = (e) => {
+        if(e.key==="Enter" && (this.state.Username && this.state.Password)){
+            this.loginUser()
+        }
     }
 
 
@@ -36,10 +50,10 @@ class Login extends Component{
 
     render(){
         return (
-            <div className="login-main">
+            <div className="login-main" onKeyDown={e => this.onEnter(e)}>
                 <div className="title-container">
-                <img src={maroonLogo} alt="book-logo"/>
-                    <h1 className='title'>BOOK EXCHANGE</h1>
+                <img className='login-image' src={maroonLogo} alt="book-logo"/>
+                    <h1 className='title'>Book Exchange</h1>
                     <div className="login-container">
                     <div className="input-container">
                     <span className='inputs'>
@@ -61,8 +75,8 @@ class Login extends Component{
                     </span>
                     </div>
                         <div className="button-container">
-                        <button className='login-buttons'onClick={this.registerUser}>REGISTER</button>
-                        <button className='login-buttons'onClick={this.loginUser}>LOGIN</button>
+                        <button className='login-buttons'onClick={this.registerUser}>Register</button>
+                        <button className='login-buttons'onClick={this.loginUser}>Login</button>
                         </div>
                     </div>
                 </div>
