@@ -1,23 +1,10 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
 class Book extends Component{
-    constructor(){
-        super()
-        this.state={
-            bookDetails:{},
-            
-        }
-    }
-    details = () =>{
-        console.log(this.props)
-        let id = this.props.book.id
-        axios.get(`/book/${id}`)
-    }
     
     
     render(){
-        let inStock= this.props.in_stock
+        
         return(
                 <div className="book-main">
                         <div className="book-information">
@@ -29,8 +16,8 @@ class Book extends Component{
                                 </span>
                             </div>
                             <div className="stock-details">
-                            <p>In Stock:{inStock}{this.props.stock}</p>
-                            <button onClick={this.details}>Details</button>
+                            <p>In Stock:<h1 id='stock'>{this.props.stock}</h1></p>
+                            <Link to={`/book/${this.props.book.id}`}><button>Details</button></Link>
                             </div>
                         </div>
                     </div>

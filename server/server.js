@@ -29,14 +29,15 @@ app.use(express.json());
 app.use(bypass.byId(1))
 
 app.use('/assets',express.static('assets'));
+app.use(express.static(__dirname+'/../build'));
 
 app.post('/auth/login', controller.login);
 app.put('/auth/register', controller.createUser);
-
 app.get('/api/user', controller.getUser);
-app.get('/api/books', controller.getBooks);
-app.delete('/api/book/:id');
-app.get('/api/book/:id', controller.getBookDetails);
+app.get('/books', controller.getBooks);
+app.get('/filter',controller.filterBooks);
+app.delete('/book/:id');
+app.get('/book/:id', controller.getBookDetails);
 app.get('/auth/logout',controller.logout)
 
 

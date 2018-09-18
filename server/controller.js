@@ -35,6 +35,23 @@ module.exports = {
             res.status(200).send("No current user");
         }
     },
+    filterBooks:(req,res)=>{
+        const dbInstance = req.app.get('db');
+        if(req.query.genre !== "All"){
+            dbInstance.filter_books([req.query.genre]).then(filteredBooks=>{
+                res.status(200).send(filteredBooks)
+            }).catch(err=>{
+                console.log(err)
+            });
+        }else{
+            dbInstance.get_books().then(library=>{
+                res.status(200).send(library)
+            }).catch(err=>{
+                res.status(500).send({errorMessage:"Oops! Something went wrong. Our engineers have been informed!"});
+                console.log(err)
+        })
+        }
+    },
     getBooks:(req,res)=>{
         const dbInstance = req.app.get('db');
         dbInstance.get_books().then(library=>{
@@ -45,8 +62,13 @@ module.exports = {
         })
     },
     getBookDetails:(req, res)=>{
+        
         const dbInstance = req.app.get('db');
-        dbInstance.get_book_details(+req.params.id)
+        dbInstance.get_book_details(+req.params.id).then(book=>{
+            res.status(200).send(book)
+        }).catch(err=>{
+            console.log(err)
+        });
     },
     logout: (req, res) => {
         req.session.destroy();

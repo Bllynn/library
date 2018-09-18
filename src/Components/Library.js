@@ -27,7 +27,7 @@ class Browse extends Component{
               });
               console.log(err)
             });
-        axios.get('api/books').then(response=>{
+        axios.get('/books').then(response=>{
             console.log(response.data)
             this.setState({
                 books:response.data,
@@ -41,26 +41,34 @@ class Browse extends Component{
               });
         })
     }
+    // filterBooks = (value) =>{
+    //     let books = this.state.books
+    //     console.log(value)
+    //     if(value === 'All'){
+    //         this.setState({
+    //             filter: this.state.books
+    //         })
+    //     }else{
+    //         let filteredItems = books.filter(items => items.genre === value)
+    //         console.log(filteredItems)
+    //         this.setState({
+    //             filter:filteredItems
+    //         })
+    //     }
+    // }
     filterBooks = (value) =>{
-        let books = this.state.books
-        console.log(value)
-        if(value === 'All'){
+        axios.get(`/filter?genre=${value}`).then(response=>{
+            console.log(response.data)
             this.setState({
-                filter: this.state.books
+                books:response.data
             })
-        }else{
-            let filteredItems = books.filter(items => items.genre === value)
-            console.log(filteredItems)
-            this.setState({
-                filter:filteredItems
-            })
-        }
+        })
     }
     
 
 
     render(){
-        let librarybooks=this.state.filter.map(e=>{
+        let librarybooks=this.state.books.map(e=>{
             return(
                 <Book
                 key={e.id}

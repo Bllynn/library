@@ -1,7 +1,7 @@
 import React from "react";
 import { HashRouter, Switch, Route } from "react-router-dom";
 import Login from './Components/Login';
-import Browse from './Components/Browse';
+import Library from './Components/Library';
 import Details from './Components/Details';
 // import {Provider} from 'react-redux';
 
@@ -10,7 +10,7 @@ const routes = (
     {/* <Provider store={store}> */}
   <Switch>
     <Route component={ Login } exact path="/" />
-    <Route component={ Browse } path="/library" />
+    <Route component={ Library } path="/library" />
     <Route component={ Details } path="/book/:id" />
   </Switch>
   {/* </Provider> */}
