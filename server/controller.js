@@ -74,5 +74,14 @@ module.exports = {
         req.session.destroy();
         console.log('You successfully logged out!')
         res.status(200).send(req.session);
+    },
+    deleteBook:(req,res)=>{
+        let id = req.params.id
+        const dbInstance = req.app.get('db');
+        dbInstance.delete_book(id).then(book=>{
+            res.sendStatus(200)
+        }).catch(err=>{
+            console.log(err)
+        });
     }
 }

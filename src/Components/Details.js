@@ -24,6 +24,12 @@ class Details extends Component{
             
         });
     }
+    deleteBook =()=>{
+        let id=this.state.book.id
+        axios.delete(`/book/${id}`).then(res =>{
+            this.props.history.push('/library')
+        })
+    }
     render(){
         console.log(this.state)
         let book = this.state.book
@@ -32,9 +38,11 @@ class Details extends Component{
             <Navbar{...this.props}/>
                 <div className="details-title">
                 <h1>Details</h1>
+                <div className="test">
+                
                     <div className="details-book">
                     <button id='edit'>Edit</button>
-                    <button id='delete'>Delete</button>
+                    <button id='delete'onClick={this.deleteBook}>Delete</button>
                     <button id='add'>+Add to Cart</button>
                     <div className="details-img">
                     <img src={book.image_url} alt=""/>
@@ -47,6 +55,7 @@ class Details extends Component{
                         <h3 className='tagid'>Description:</h3><p id='content'>{book.description}</p>
                     </div>
                     </div>
+                </div>
                 </div>
             </div>
         )

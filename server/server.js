@@ -36,7 +36,7 @@ app.put('/auth/register', controller.createUser);
 app.get('/api/user', controller.getUser);
 app.get('/books', controller.getBooks);
 app.get('/filter',controller.filterBooks);
-app.delete('/book/:id');
+app.delete('/book/:id',controller.deleteBook);
 app.get('/book/:id', controller.getBookDetails);
 app.get('/auth/logout',controller.logout)
 
