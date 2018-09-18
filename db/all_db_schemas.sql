@@ -2,7 +2,7 @@ CREATE TABLE librarycard(
 id SERIAL PRIMARY KEY,
 username VARCHAR(25) UNIQUE,
 password VARCHAR(25)
-)
+);
 CREATE TABLE books(
 id SERIAL PRIMARY KEY,
 title VARCHAR(50),

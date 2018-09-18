@@ -1,9 +1,8 @@
-.navbar{
-    height:70px;
-    display:flex;
-    
+.navbar {
+  height: 70px;
+  display: flex;
 }
-.img{
-    height:50px;
-    width:auto
+.img {
+  height: 50px;
+  width: auto;
 }
