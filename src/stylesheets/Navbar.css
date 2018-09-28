@@ -1,8 +1,33 @@
-.navbar {
-  height: 70px;
-  display: flex;
+.navbar{
+  background-color:#020402;
+  display:flex;
+  align-items:center;
+  height:70px;
+  display:flex;
+  width:100%;
 }
-.img {
-  height: 50px;
-  width: auto;
+.img{
+  position:relative;
+  height:50px;
+  width:auto
+}
+.navbar-list{
+  font-family:'Alegreya SC',serif;
+  display:flex;
+  width:500px;
+  margin-left:15px;
+  color:#C6B38E;
+}
+.list-items{
+  list-style: none;   
+  cursor:pointer;
+  padding:15px 20px;
+}
+
+.logout{
+  cursor:pointer;
+  font-family:'Alegreya SC',serif;
+  position:absolute;
+  right:20px;
+  color:#C6B38E;
 }

@@ -1,0 +1,47 @@
+.browse-main{
+    height:100%;
+    width:100%;
+    background-color: #4E1E29;
+}
+.browse-inventory{
+    display:flex;
+    padding:10px;
+    font-size:30px;
+    font-family:'Alegreya SC',serif;
+    color:#4E1E29;
+    margin:50px auto;
+    display:flex;
+    flex-direction:column;
+    background-color:#C6B38E;
+    align-content: center;
+    height:100%;
+    width:75%;
+    border-radius:10px;
+}
+.browse-header{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.selectors{
+    display:flex;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size:15px;
+    
+}
+.stock-selectors{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+#listFilter{
+    width:150px;
+    background-color: #FBFFE6;
+    border-radius:5px;
+}
+.add-button{
+    display:flex;
+    justify-content: flex-end;
+    margin:10px;
+}

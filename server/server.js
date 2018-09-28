@@ -30,6 +30,7 @@ app.use("/assets", express.static("assets"));
 app.use(express.static(__dirname + "/../build"));
 
 app.post("/auth/login", controller.login);
+//////////////////////////////request level middleware///////////////////
 app.put("/auth/register", bypass.checkUserName, controller.createUser);
 app.get("/api/user", controller.getUser);
 app.get("/books", controller.getBooks);

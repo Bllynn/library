@@ -5,17 +5,17 @@ class Book extends Component {
     return (
       <div className="book-main">
         <div className="book-information">
-          <img className="cover" src={this.props.image} alt="coverart" />
-          <div className="title-author">
+          <img className="book-cover" src={this.props.image} alt="coverart" />
+          <div className="book-title-author">
             <h1 className="book-title">{this.props.title}</h1>
-            <span className="author">
+            <span className="book-author">
               <p> by </p> <h6>{this.props.author}</h6>
             </span>
           </div>
-          <div className="stock-details">
+          <div className="book-stock-details">
             <p>
               In Stock:
-              <h1 id="stock">{this.props.stock}</h1>
+              <h1 id="book-stock">{this.props.stock}</h1>
             </p>
             <Link to={`/book/${this.props.book.id}`}>
               <button>Details</button>

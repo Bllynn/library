@@ -10,6 +10,7 @@ class Details extends Component {
     };
   }
   componentDidMount() {
+    /////match object
     const id = this.props.match.params.id;
     console.log(id);
     axios
@@ -26,6 +27,7 @@ class Details extends Component {
         });
       });
   }
+  ////delete
   deleteBook = () => {
     let id = this.state.book.id;
     axios.delete(`/books/${id}`).then(res => {
@@ -48,7 +50,7 @@ class Details extends Component {
               </button>
               <button id="add">+Add to Cart</button>
               <div className="details-img">
-                <img src={book.image_url} alt="" />
+                <img id ='details-img' src={book.image_url}alt="" />
               </div>
               <div className="descriptions">
                 <h3 className="tagid">

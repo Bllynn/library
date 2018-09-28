@@ -3,6 +3,7 @@ import axios from "axios";
 import swal from "sweetalert2";
 import Book from "./Book";
 import Navbar from "./Navbar";
+import { runInNewContext } from "vm";
 
 class Browse extends Component {
   constructor() {
@@ -10,7 +11,9 @@ class Browse extends Component {
     this.state = {
       user: [],
       books: [],
-      filter: []
+      filteredBooks: [],
+      inStock: false,
+      outofStock: false
     };
   }
   componentDidMount() {
@@ -33,10 +36,9 @@ class Browse extends Component {
     axios
       .get("/books")
       .then(response => {
-        console.log(response.data);
         this.setState({
           books: response.data,
-          filter: response.data
+          filteredBooks: response.data
         });
       })
       .catch(err => {
@@ -47,17 +49,65 @@ class Browse extends Component {
         });
       });
   }
+  checkInStock = () => {
+    console.log(this.state)
+    let available = [];
+    this.state.books.map((e,i) => {
+      if ((e.in_stock === "Yes") &&(this.state.inStock === false)){
+        available.push(e)
+      }
+      if((e.in_stock ==="Yes") && (this.state.inStock === true)){
+        console.log(available)
+      }
+      
+      if ((e.in_stock === "No") && (this.state.outofStock === false)){
+      }
+      if((this.state.inStock ===true) && (this.state.outofStock === true)){
+        this.setState({
+          filteredBooks:this.state.books,
+          inStock:!this.state.inStock
+        })
+      }
+    });
+    console.log(available)
+    this.setState({
+      filteredBooks: available,
+      inStock: !this.state.inStock
+    });
+  };
+  checkOutStock = () => {
+    let unavailable = []
+    this.state.books.map((e,i) => {
+      if ((e.in_stock === "No") &&(this.state.outofStock ===false)) {
+        unavailable.push(e)
+      }
+      if ((e.in_stock === "Yes") && (this.state.inStock ===false)){
+      }
+      if ((e.in_stock === "Yes") && (this.state.inStock ===true)){
+        unavailable.push(e)
+      }
+    });
+    console.log(unavailable);
+    this.setState({
+      filteredBooks: unavailable,
+      outofStock: !this.state.outofStock
+    });
+  };
+
   filterBooks = value => {
+    //query
     axios.get(`/filter?genre=${value}`).then(response => {
       console.log(response.data);
       this.setState({
-        books: response.data
+        books: response.data,
+        filteredBooks: response.data
       });
     });
   };
 
   render() {
-    let librarybooks = this.state.books.map(e => {
+    console.log(this.state);
+    let librarybooks = this.state.filteredBooks.map(e => {
       return (
         <Book
           key={e.id}
@@ -71,21 +121,30 @@ class Browse extends Component {
         />
       );
     });
+
     return (
-      <div className="browse-main">
+      <div className="library-main">
         <Navbar {...this.props} />
-        <div className="browse-inventory">
-          <div className="browse-header">
+        <div className="library-inventory">
+          <div className="library-header">
             <h1>Browse Inventory</h1>
             <div className="selectors">
               <ul>
                 <li className="stock-selectors">
                   In Stock
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    checked={this.state.inStock}
+                    onChange={this.checkInStock}
+                  />
                 </li>
                 <li className="stock-selectors">
                   Out of Stock
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    checked={this.state.outofStock}
+                    onChange={this.checkOutStock}
+                  />
                 </li>
               </ul>
               Genre
