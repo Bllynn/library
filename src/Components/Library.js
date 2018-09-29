@@ -50,40 +50,48 @@ class Browse extends Component {
       });
   }
   checkInStock = () => {
-    console.log(this.state)
+    console.log(this.state);
     let available = [];
-    this.state.books.map((e,i) => {
-      if ((e.in_stock === "Yes") &&(this.state.inStock === false)){
+    this.state.books.map((e, i) => {
+      if ((this.state.inStock === false) && (this.state.outofStock === false)) {
+        if (e.in_stock === "Yes") {
+          available.push(e);
+        }
+      }
+      if((this.state.inStock === true) && (this.state.outofStock === false)){
         available.push(e)
       }
-      if((e.in_stock ==="Yes") && (this.state.inStock === true)){
-        console.log(available)
+      if((this.state.inStock === false) && (this.state.outofStock === true)){
+        available.push(e)
       }
-      
-      if ((e.in_stock === "No") && (this.state.outofStock === false)){
-      }
-      if((this.state.inStock ===true) && (this.state.outofStock === true)){
-        this.setState({
-          filteredBooks:this.state.books,
-          inStock:!this.state.inStock
-        })
+      if((this.state.inStock === true) && (this.state.outofStock === true)){
+        if(e.in_stock ==='No')
+        available.push(e)
       }
     });
-    console.log(available)
+    console.log(available);
     this.setState({
       filteredBooks: available,
       inStock: !this.state.inStock
     });
   };
   checkOutStock = () => {
-    let unavailable = []
-    this.state.books.map((e,i) => {
-      if ((e.in_stock === "No") &&(this.state.outofStock ===false)) {
+    console.log(this.state);
+    let unavailable = [];
+    this.state.books.map((e, i) => {
+      if ((this.state.outofStock === false) && (this.state.inStock === false)) {
+        if (e.in_stock === "No") {
+          unavailable.push(e);
+        }
+      }
+      if((this.state.outofStock === true) && (this.state.inStock === false)){
         unavailable.push(e)
       }
-      if ((e.in_stock === "Yes") && (this.state.inStock ===false)){
+      if((this.state.outofStock ===false)&& (this.state.inStock === true)){
+        unavailable.push(e)
       }
-      if ((e.in_stock === "Yes") && (this.state.inStock ===true)){
+      if((this.state.outofStock === true)&& (this.state.inStock === true)){
+        if(e.in_stock ==='Yes')
         unavailable.push(e)
       }
     });
@@ -93,12 +101,13 @@ class Browse extends Component {
       outofStock: !this.state.outofStock
     });
   };
-
   filterBooks = value => {
     //query
     axios.get(`/filter?genre=${value}`).then(response => {
       console.log(response.data);
       this.setState({
+        inStock:false,
+        outofStock:false,
         books: response.data,
         filteredBooks: response.data
       });
