@@ -9,20 +9,22 @@ module.exports = {
         res.status(200).send(user);
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
       });
   },
   login: (req, res) => {
     const dbInstance = req.app.get("db");
     const { Username, Password } = req.body;
-    
     dbInstance
       .login([Username, Password])
       .then(user => {
-        req.session.user = user[0].id;
-        res.status(200).send(user);
-      })
-      .catch(err => {
+        console.log(user);
+        if(user.length >=1){
+          req.session.user = user[0].id;
+          res.status(200).send(user);
+        }
+        res.sendStatus(201)
+      }).catch(err => {
         console.log(err);
       });
   },
@@ -30,18 +32,17 @@ module.exports = {
     const dbInstance = req.app.get("db");
     if (req.session.user) {
       const userId = req.session.user;
+      console.log(userId)
       dbInstance
-        .get_user([userId])
+        .get_userid([userId])
         .then(user => {
           res.status(200).send(user);
         })
         .catch(err => {
-          res
-            .status(500)
-            .send({
-              errorMessage:
-                "Oops! Something went wrong. Our engineers have been informed!"
-            });
+          res.status(500).send({
+            errorMessage:
+              "Oops! Something went wrong. Our engineers have been informed!"
+          });
           console.log(err);
         });
     } else {
@@ -66,12 +67,10 @@ module.exports = {
           res.status(200).send(library);
         })
         .catch(err => {
-          res
-            .status(500)
-            .send({
-              errorMessage:
-                "Oops! Something went wrong. Our engineers have been informed!"
-            });
+          res.status(500).send({
+            errorMessage:
+              "Oops! Something went wrong. Our engineers have been informed!"
+          });
           console.log(err);
         });
     }
@@ -84,12 +83,10 @@ module.exports = {
         res.status(200).send(library);
       })
       .catch(err => {
-        res
-          .status(500)
-          .send({
-            errorMessage:
-              "Oops! Something went wrong. Our engineers have been informed!"
-          });
+        res.status(500).send({
+          errorMessage:
+            "Oops! Something went wrong. Our engineers have been informed!"
+        });
         console.log(err);
       });
   },
@@ -120,5 +117,33 @@ module.exports = {
       .catch(err => {
         console.log(err);
       });
+  },
+  addtoCart: (req, res) => {
+    let book_id = req.params.id;
+    let user_id = req.session.user;
+    console.log("addtoCart TEST", book_id, user_id);
+    const dbInstance = req.app.get("db");
+    dbInstance
+      .check_cart(user_id, +book_id)
+      .then(cart => {
+        console.log(cart);
+        if (cart.length < 1) {
+          dbInstance
+            .add_to_cart([user_id, book_id])
+            .then()
+            .catch(err => {
+              console.log("11111", err);
+            });
+          /////////////trying to get it to add only 1 copy of each book to librarycart/////
+        }
+        if((cart.length === 1) && (cart[0].book_id === Number(book_id) )){
+          console.log(cart.length)
+          
+          res.sendStatus(202)
+        }
+      })
+      .catch(err => {
+        console.log("2222222", err);
+      })
   }
 };

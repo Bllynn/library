@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import '../stylesheets/Login.css';
 import maroonLogo from "../maroonLogo.svg";
 import axios from "axios";
+import swal from "sweetalert2";
 
 class Login extends Component {
   constructor() {
@@ -15,12 +16,30 @@ class Login extends Component {
     let { Username, Password } = this.state;
     console.log(this.state);
     axios
-      .post("/auth/login", { Username: Username, Password: Password })
+      .get("/auth/login", { Username: Username, Password: Password })
       .then(response => {
-        this.props.history.push("/library");
+        console.log(response)
+        if(response.status ===200){
+          this.props.history.push("/library")
+        }
+        if (response.status === 201){
+          swal({
+            title: 'Username does not exist',
+            text: `To create a new username ${Username},please click on register`,
+            type: "warning",
+            confirmButtonText: "OK",
+            showCancelButton:false
+          })
+        }
       })
       .catch(err => {
-        console.log("Something went wrong", err);
+        swal({
+          title: 'Something went wrong',
+          text: `${err}`,
+          type: "error",
+          confirmButtonText: "OK",
+          showCancelButton:false
+        })
       });
   };
   registerUser = () => {
@@ -37,7 +56,13 @@ class Login extends Component {
         this.props.history.push("/library");
       })
       .catch(err => {
-        console.log("OH NO! Something went terribly wrong!", err);
+        swal({
+          title: 'Username already exists',
+          text: `${Username} already exists`,
+          type: "warning",
+          confirmButtonText: "OK",
+          showCancelButton:false
+        })
       });
   };
   onEnter = e => {

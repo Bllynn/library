@@ -53,17 +53,6 @@
      right:98px;
      bottom:15px;
  }
-.details-img{
-    /* background-image:linear-gradient(#FBFFE6, #4E1E29); */
-    color:white;
-    margin:25px 10px;
-    height: 275px;
-    width: auto;
-}
-#details-img{
-    max-height:275px;
-    width:auto
-}
 .descriptions{
     flex-direction: column;
     margin: 5px -15px 15px 10px;

@@ -29,7 +29,7 @@ app.use(bypass.byId(1));
 app.use("/assets", express.static("assets"));
 app.use(express.static(__dirname + "/../build"));
 
-app.post("/auth/login", controller.login);
+app.get("/auth/login", controller.login);
 //////////////////////////////request level middleware///////////////////
 app.put("/auth/register", bypass.checkUserName, controller.createUser);
 app.get("/api/user", controller.getUser);
@@ -37,6 +37,7 @@ app.get("/books", controller.getBooks);
 app.get("/filter", controller.filterBooks);
 app.delete("/books/:id", controller.deleteBook);
 app.get("/books/:id", controller.getBookDetails);
+app.post("/cart/:id",controller.addtoCart);
 app.get("/auth/logout", controller.logout);
 
 const port = SERVER_PORT || 1337;

@@ -15,8 +15,9 @@ class Book extends Component {
           <div className="book-stock-details">
             <p>
               In Stock:
-              <h1 id="book-stock">{this.props.stock}</h1>
-            </p>
+              </p>
+              <p id="book-stock">{this.props.stock}</p>
+            
             <Link to={`/book/${this.props.book.id}`}>
               <button>Details</button>
             </Link>

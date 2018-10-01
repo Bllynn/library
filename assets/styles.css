@@ -217,13 +217,6 @@ table {
      right:98px;
      bottom:15px;
  }
-.details-img{
-    background-image:linear-gradient(#FBFFE6, #4E1E29);
-    color:white;
-    margin:25px 10px;
-    height: 275px;
-    width: 250px;
-}
 .descriptions{
     flex-direction: column;
     margin: 5px -15px 15px 10px;
@@ -251,6 +244,7 @@ table {
 
 /*/////////////////////////LIBRARY/////////////////////////////*/
 .library-main{
+    min-height:100vh;
     height:100%;
     width:100%;
     background-color: #4E1E29;
