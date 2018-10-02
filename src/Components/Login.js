@@ -14,25 +14,37 @@ class Login extends Component {
   }
   loginUser = () => {
     let { Username, Password } = this.state;
-    console.log(this.state);
+    console.log(Username, Password);
     axios
-      .get("/auth/login", { Username: Username, Password: Password })
+      .put("/auth/login", { Username: Username, Password: Password })
       .then(response => {
-        console.log(response)
         if(response.status ===200){
+          console.log(response.status)
           this.props.history.push("/library")
         }
         if (response.status === 201){
+          console.log(response.status)
           swal({
-            title: 'Username does not exist',
-            text: `To create a new username ${Username},please click on register`,
+            title: 'Username or password incorrect',
+            text: `To create a new username, please click on register`,
             type: "warning",
             confirmButtonText: "OK",
             showCancelButton:false
           })
         }
       })
-      .catch(err => {
+      .catch((err,res) => {
+        console.log(res)
+        // if(response.statusCode === 401){
+        //   console.log(response.statusCode)
+        //   swal({
+        //     title: 'Username or password combination Incorrect',
+        //     text: `Please check Username: ${Username} and Password combination again`,
+        //     type: "warning",
+        //     confirmButtonText: "OK",
+        //     showCancelButton:false
+        //   })
+        // }
         swal({
           title: 'Something went wrong',
           text: `${err}`,
@@ -58,7 +70,7 @@ class Login extends Component {
       .catch(err => {
         swal({
           title: 'Username already exists',
-          text: `${Username} already exists`,
+          text: `Username: ${Username}, already exists`,
           type: "warning",
           confirmButtonText: "OK",
           showCancelButton:false
