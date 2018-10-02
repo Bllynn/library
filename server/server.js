@@ -14,22 +14,22 @@ massive(CONNECTION_STRING).then(db => {
   console.log("ready to fire");
 });
 
+
 app.use(
   session({
     secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: true
   })
-);
+  );
 
 app.use(express.json());
-
 app.use(bypass.byId(1));
 
 app.use("/assets", express.static("assets"));
 app.use(express.static(__dirname + "/../build"));
 
-app.get("/auth/login", controller.login);
+app.put("/auth/login", controller.login);
 //////////////////////////////request level middleware///////////////////
 app.put("/auth/register", bypass.checkUserName, controller.createUser);
 app.get("/api/user", controller.getUser);

@@ -3,18 +3,29 @@ module.exports = {
     const dbInstance = req.app.get("db");
     const { Username, Password } = req.body;
     dbInstance
+    .check_username(Username)
+    .then(user =>{
+      if(user.length>=1){
+        res.sendStatus(401)
+      }
+    })
       .create_user([Username, Password])
       .then(user => {
-        req.session.user = user[0].id;
-        res.status(200).send(user);
-      })
-      .catch(err => {
+        console.log(user);
+        if(user.length >=1){
+          req.session.user = user[0].id;
+          res.status(200).send(user);
+        }
+        res.sendStatus(401)
+      }).catch(err => {
         console.log(err);
       });
   },
   login: (req, res) => {
     const dbInstance = req.app.get("db");
     const { Username, Password } = req.body;
+    console.log(req)
+    console.log(Username,Password)
     dbInstance
       .login([Username, Password])
       .then(user => {
