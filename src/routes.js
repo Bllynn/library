@@ -3,6 +3,7 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import Login from './Components/Login';
 import Library from './Components/Library';
 import Details from './Components/Details';
+import Edit from './Components/Edit';
 // import {Provider} from 'react-redux';
 
 const routes = (
@@ -12,6 +13,7 @@ const routes = (
     <Route component={ Login } exact path="/" />
     <Route component={ Library } path="/library" />
     <Route component={ Details } path="/book/:id" />
+    <Route component={ Edit } path="/edit/:id" />
   </Switch>
   {/* </Provider> */}
   </HashRouter>

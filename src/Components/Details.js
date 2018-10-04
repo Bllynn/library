@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Navbar from "./Navbar";
 import swal from "sweetalert2";
 import axios from "axios";
+import {withRouter} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 class Details extends Component {
   constructor(props) {
     super(props);
@@ -64,6 +66,8 @@ class Details extends Component {
         console.log(err);
       });
   };
+  /////clog/////
+ 
   ////delete
   deleteBook = () => {
     let id = this.state.book.id;
@@ -104,10 +108,15 @@ class Details extends Component {
       <div className="details-main">
         <Navbar {...this.props} />
         <div className="details-title">
-          <h1>Details</h1>
+          <article>
+            <h1>Details</h1>
+            <p onClick={()=>this.props.history.goBack()}>Back</p>
+          </article>
           <div className="test">
             <div className="details-book">
+            <Link to={`/Edit/${book.id}`}>
               <button id="edit">Edit</button>
+            </Link>
               <button id="delete" onClick={this.deleteBook}>
                 Delete
               </button>
@@ -119,7 +128,7 @@ class Details extends Component {
                   style={styles}
                   id="details-img"
                   src={book.image_url}
-                  alt=""
+                  alt="bookcover"
                 />
               </div>
               <div className="descriptions">

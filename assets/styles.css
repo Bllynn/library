@@ -178,8 +178,16 @@ table {
     width:80%;
     border-radius:5px;
 }
-.details-title>h1{
+/* .details-title>h1{
     position:relative;
+    left:20px;
+    font-family:'Alegreya SC',serif;
+    font-size:50px;
+    padding-top:15px;
+} */
+article>h1{
+    position:relative;
+    display:inline-flex;
     left:20px;
     font-family:'Alegreya SC',serif;
     font-size:50px;
@@ -342,6 +350,23 @@ table {
     padding:0 10px;
     font-family:'Open Sans',sans-serif;
 }
+/*///////////////////////////EDIT///////////////////////////////*/
+
+.edit-main{
+    background-color:#4E1E29;
+    border-radius:10px;
+    background-color: #FBFFE6;
+    width:69%;
+    height:20%;
+    margin:15px auto;
+}
+.edit-information{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    height:auto;
+}
+.edit-genre
 
 
 
@@ -349,9 +374,7 @@ table {
 
 
 
-
-
-
+/*/////////////////REST///////////////////////////*/
 button{
     cursor:pointer;
     font-family:'Alegreya SC',serif;
