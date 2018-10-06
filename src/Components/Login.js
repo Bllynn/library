@@ -16,7 +16,7 @@ class Login extends Component {
     let { Username, Password } = this.state;
     console.log(this.state);
     axios
-      .get("/auth/login", { Username: Username, Password: Password })
+      .put("/auth/login", { Username: Username, Password: Password })
       .then(response => {
         console.log(response)
         if(response.status ===200){

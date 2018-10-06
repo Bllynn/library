@@ -29,9 +29,10 @@ app.use(bypass.byId(1));
 app.use("/assets", express.static("assets"));
 app.use(express.static(__dirname + "/../build"));
 
-app.get("/auth/login", controller.login);
+app.put("/auth/login", controller.login);
 //////////////////////////////request level middleware///////////////////
 app.put("/auth/register", bypass.checkUserName, controller.createUser);
+app.put("/edit/:id",controller.editBook);
 app.get("/api/user", controller.getUser);
 app.get("/books", controller.getBooks);
 app.get("/filter", controller.filterBooks);

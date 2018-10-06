@@ -15,6 +15,7 @@ module.exports = {
   login: (req, res) => {
     const dbInstance = req.app.get("db");
     const { Username, Password } = req.body;
+    console.log(Username,Password)
     dbInstance
       .login([Username, Password])
       .then(user => {
@@ -117,6 +118,11 @@ module.exports = {
       .catch(err => {
         console.log(err);
       });
+  },
+  editBook:(req,res) =>{
+    let id = req.params.id;
+    console.log(11111,id,req.body)
+    let {title, author, genre, image_url,description} = req.body
   },
   addtoCart: (req, res) => {
     let book_id = req.params.id;

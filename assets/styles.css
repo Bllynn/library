@@ -193,6 +193,9 @@ article>h1{
     font-size:50px;
     padding-top:15px;
 }
+article>p:hover{
+    cursor:pointer;
+}
 .test{
     position: relative;
 }
@@ -355,26 +358,46 @@ article>h1{
 .edit-main{
     background-color:#4E1E29;
     border-radius:10px;
-    background-color: #FBFFE6;
+    min-height:100vh;
+    max-height:100%;
+}
+.edit-title{
+    font-size:30px;
+    font-weight:600;
+    font-family:'Alegreya SC',serif;
+    color:#4E1E29;
+    padding:10px;
+    position:relative;
+    margin:150px auto auto auto; 
+    background-color:#C6B38E;
+    height:65%;
+    width:80%;
+    border-radius:5px;
+
+}
+.edit-title>p{
+    cursor: pointer;
+}
+.edit-card{
+    font-size: 16px;
+    font-weight: normal;
+    font-family: 'Open Sans', sans-serif;
+    display:flex;
+    color:#C6B38E;
+    justify-content: space-around;
+    align-content: center;
+    height:auto;
+    background-color: #242325;
     width:69%;
     height:20%;
     margin:15px auto;
 }
-.edit-information{
+.edit-rightcard{
     display:flex;
     flex-direction: column;
-    justify-content: center;
-    height:auto;
+    padding:20px 15px;
 }
-.edit-genre
 
-
-
-
-
-
-
-/*/////////////////REST///////////////////////////*/
 button{
     cursor:pointer;
     font-family:'Alegreya SC',serif;
@@ -389,11 +412,6 @@ button{
     background-color:#a52422;
     color:#C6B38E;
 }
-
-
-
-
-
 .author > p{
     padding:0 5px;
     font-size:15px;

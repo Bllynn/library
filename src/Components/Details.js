@@ -110,7 +110,7 @@ class Details extends Component {
         <div className="details-title">
           <article>
             <h1>Details</h1>
-            <p onClick={()=>this.props.history.goBack()}>Back</p>
+            <p onClick={()=>this.props.history.goBack()}> &lt;Back</p>
           </article>
           <div className="test">
             <div className="details-book">
