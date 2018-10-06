@@ -15,17 +15,18 @@ module.exports = {
   login: (req, res) => {
     const dbInstance = req.app.get("db");
     const { Username, Password } = req.body;
-    console.log(Username,Password)
+    console.log(Username, Password);
     dbInstance
       .login([Username, Password])
       .then(user => {
         console.log(user);
-        if(user.length >=1){
+        if (user.length >= 1) {
           req.session.user = user[0].id;
           res.status(200).send(user);
         }
-        res.sendStatus(201)
-      }).catch(err => {
+        res.sendStatus(201);
+      })
+      .catch(err => {
         console.log(err);
       });
   },
@@ -33,7 +34,7 @@ module.exports = {
     const dbInstance = req.app.get("db");
     if (req.session.user) {
       const userId = req.session.user;
-      console.log(userId)
+      console.log(userId);
       dbInstance
         .get_userid([userId])
         .then(user => {
@@ -119,10 +120,18 @@ module.exports = {
         console.log(err);
       });
   },
-  editBook:(req,res) =>{
-    let id = req.params.id;
-    console.log(11111,id,req.body)
-    let {title, author, genre, image_url,description} = req.body
+  editBook: (req, res) => {
+    let { id, title, author, genre, description, image } = req.body;
+    const dbInstance = req.app.get("db");
+    dbInstance
+      .edit_book(id, title, author, genre, image, description)
+      .then(book => {
+        console.log(book)
+        res.status(200).send(book);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   },
   addtoCart: (req, res) => {
     let book_id = req.params.id;
@@ -142,14 +151,14 @@ module.exports = {
             });
           /////////////trying to get it to add only 1 copy of each book to librarycart/////
         }
-        if((cart.length === 1) && (cart[0].book_id === Number(book_id) )){
-          console.log(cart.length)
-          
-          res.sendStatus(202)
+        if (cart.length === 1 && cart[0].book_id === Number(book_id)) {
+          console.log(cart.length);
+
+          res.sendStatus(202);
         }
       })
       .catch(err => {
         console.log("2222222", err);
-      })
+      });
   }
 };

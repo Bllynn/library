@@ -397,6 +397,26 @@ article>p:hover{
     flex-direction: column;
     padding:20px 15px;
 }
+#edit-input{
+    margin:.625em;
+    font-family:'Open Sans', sans-serif;
+    background-color: #FBFFE6;
+}
+#edit-description{
+    margin:.625em;
+    background-color:#FBFFE6;
+    font-family:'Open Sans', sans-serif;
+    height:200px;
+    width:410px;
+    resize:none;
+    border-radius:5px;
+}
+#edit-filter{
+    margin:.625em;
+    font-family:'Open Sans', sans-serif;
+    background-color: #FBFFE6;
+    border-radius:5px;
+}
 
 button{
     cursor:pointer;
@@ -411,6 +431,12 @@ button{
     border-radius:5px;
     background-color:#a52422;
     color:#C6B38E;
+}
+input{
+    margin:.625em;
+    font-family:'Open-Sans' sans-serif;
+    background-color: #FBFFE6;
+    border-radius:5px;
 }
 .author > p{
     padding:0 5px;
