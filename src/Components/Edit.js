@@ -41,12 +41,12 @@ class Edit extends Component {
   updateBook = () => {
     const id = this.props.match.params.id;
     let { title, author, genre, image, description } = this.state;
-    console.log(title,author)
+    // console.log(title,author,genre,image,description)
     axios
-      .put(`/edit/${id}`, {id, title, author, genre, image, description})
+      .put(`/edit/${id}`, { id, title, author, genre, image, description })
       .then(res => {
-        console.log(res)
-        this.props.history.push(`/book/${id}`);
+        // console.log(res)
+        this.props.history.push(`/library`);
       })
       .catch(err => {
         console.log(err);
@@ -58,20 +58,45 @@ class Edit extends Component {
         <Navbar {...this.props} />
         <div className="edit-title">
           <h1>Edit</h1>
-          <p onClick={() => this.props.history.goBack()}> &lt;Back</p>
+          <p
+            className="edit-goBack"
+            onClick={() => this.props.history.goBack()}
+          >
+            {" "}
+            &lt;Back
+          </p>
           <div className="edit-card">
             <section className="edit-leftcard">
-              <p>Image:</p>
+            <article className='img-input'>
+              <p>Image url</p>
               <input
-                id="edit-input"
+                id="edit-urlinput"
                 type="text"
                 value={this.state.image}
                 name="image"
                 onChange={this.handleChange}
               />
+
+            </article>
+              <article className='img-preview'>
+                <p>
+                  Image Preview
+                </p>
+                  <img
+                    className="edit-img"
+                    src={this.state.image}
+                    alt="book cover"
+                  />
+              </article>
+                  
+            </section>
+            <section className="edit-middlecard">
+              <p>Title</p>
+              <p>Author</p>
+              <p>Genre</p>
+              <p>Description</p>
             </section>
             <section className="edit-rightcard">
-              <p>Title:</p>
               <input
                 id="edit-input"
                 type="text"
@@ -80,7 +105,6 @@ class Edit extends Component {
                 onChange={this.handleChange}
               />
 
-              <p>Author:</p>
               <input
                 id="edit-input"
                 type="text"
@@ -89,11 +113,11 @@ class Edit extends Component {
                 onChange={this.handleChange}
               />
 
-              <p>Genre:</p>
               <select
                 name="genre"
                 id="edit-filter"
                 onChange={this.handleChange}
+                value={this.state.genre}
               >
                 <option value="Sports">Sports</option>
                 <option value="Crime">Crime</option>
@@ -102,7 +126,6 @@ class Edit extends Component {
                 <option value="Childrens">Children</option>
               </select>
 
-              <p>Description:</p>
               <textarea
                 type="text"
                 value={this.state.description}
@@ -110,7 +133,7 @@ class Edit extends Component {
                 id="edit-description"
                 onChange={this.handleChange}
               />
-              <button onClick={this.updateBook}>Save Book</button>
+              <button id='save-button'onClick={this.updateBook}>Save Book</button>
             </section>
           </div>
         </div>

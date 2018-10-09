@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Navbar from "./Navbar";
 import swal from "sweetalert2";
 import axios from "axios";
-import {withRouter} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 class Details extends Component {
   constructor(props) {
@@ -32,7 +31,7 @@ class Details extends Component {
   }
   addtoCart = () => {
     let { id, in_stock,title } = this.state.book;
-    console.log(id);
+    // console.log(id);
     if(in_stock ==='No'){
       swal({
         title: `${title},copy #${id} not in stock`,
@@ -45,7 +44,7 @@ class Details extends Component {
     axios
       .post(`/cart/${id}`)
       .then(res => {
-        console.log(res.status);
+        // console.log(res.status);
         if (res.status === 200) {
           swal({
             title: "Book added to cart",

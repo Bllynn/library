@@ -3,7 +3,6 @@ import axios from "axios";
 import swal from "sweetalert2";
 import Book from "./Book";
 import Navbar from "./Navbar";
-import { runInNewContext } from "vm";
 
 class Browse extends Component {
   constructor() {
@@ -52,7 +51,7 @@ class Browse extends Component {
   checkInStock = () => {
     console.log(this.state);
     let available = [];
-    this.state.books.map((e, i) => {
+    this.state.books.map(e => {
       if ((this.state.inStock === false) && (this.state.outofStock === false)) {
         if (e.in_stock === "Yes") {
           available.push(e);
@@ -68,6 +67,7 @@ class Browse extends Component {
         if(e.in_stock ==='No')
         available.push(e)
       }
+      return available;
     });
     console.log(available);
     this.setState({
@@ -78,7 +78,7 @@ class Browse extends Component {
   checkOutStock = () => {
     console.log(this.state);
     let unavailable = [];
-    this.state.books.map((e, i) => {
+    this.state.books.map(e => {
       if ((this.state.outofStock === false) && (this.state.inStock === false)) {
         if (e.in_stock === "No") {
           unavailable.push(e);
@@ -94,6 +94,7 @@ class Browse extends Component {
         if(e.in_stock ==='Yes')
         unavailable.push(e)
       }
+      return unavailable;
     });
     console.log(unavailable);
     this.setState({
