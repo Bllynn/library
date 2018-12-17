@@ -14,56 +14,93 @@ class Login extends Component {
   }
   loginUser = () => {
     let { Username, Password } = this.state;
+    if (Username === "") {
+      swal({
+        title: "Username cannot be empty",
+        text: `please type a username`,
+        type: "warning",
+        confirmButtonText: "OK",
+        showCancelButton: false
+      });
+    }
+    if (Password === "") {
+      swal({
+        title: "Password cannot be empty",
+        text: `please type a password`,
+        type: "warning",
+        confirmButtonText: "OK",
+        showCancelButton: false
+      });
+    }
     console.log(this.state);
     axios
       .put("/auth/login", { Username: Username, Password: Password })
       .then(response => {
-        console.log(response)
-        if(response.status ===200){
-          this.props.history.push("/library")
+        console.log(response);
+        if (response.status === 200) {
+          this.props.history.push("/library");
         }
-        if (response.status === 201){
+        if (response.status === 201) {
           swal({
-            title: 'Username does not exist',
-            text: `To create a new username ${Username},please click on register`,
+            title: "Username does not exist",
+            text: `To create a new username ${Username}, please click on register`,
             type: "warning",
             confirmButtonText: "OK",
-            showCancelButton:false
-          })
+            showCancelButton: false
+          });
         }
       })
       .catch(err => {
         swal({
-          title: 'Something went wrong',
+          title: "Something went wrong",
           text: `${err}`,
           type: "error",
           confirmButtonText: "OK",
-          showCancelButton:false
-        })
+          showCancelButton: false
+        });
       });
   };
   registerUser = () => {
     let { Username, Password } = this.state;
     console.log(this.state);
-    axios
-      .put("/auth/register", { Username: Username, Password: Password })
-      .then(response => {
-        console.log(response)
-        this.setState({
-          Username: "",
-          Password: ""
-        });
-        this.props.history.push("/library");
-      })
-      .catch(err => {
-        swal({
-          title: 'Username already exists',
-          text: `${Username} already exists`,
-          type: "warning",
-          confirmButtonText: "OK",
-          showCancelButton:false
-        })
+    if (Username === "") {
+      swal({
+        title: "Username cannot be empty",
+        text: `please type a valid username`,
+        type: "warning",
+        confirmButtonText: "OK",
+        showCancelButton: false
       });
+    }
+    if (Password === "") {
+      swal({
+        title: "Password cannot be empty",
+        text: `please type a valid password`,
+        type: "warning",
+        confirmButtonText: "OK",
+        showCancelButton: false
+      });
+    } else if (Username !== "" && Password !== "") {
+      axios
+        .put("/auth/register", { Username: Username, Password: Password })
+        .then(response => {
+          console.log(response);
+          this.setState({
+            Username: "",
+            Password: ""
+          });
+          this.props.history.push("/library");
+        })
+        .catch(err => {
+          swal({
+            title: "Username already exists",
+            text: `${Username} already exists`,
+            type: "warning",
+            confirmButtonText: "OK",
+            showCancelButton: false
+          });
+        });
+    }
   };
   onEnter = e => {
     if (e.key === "Enter" && (this.state.Username && this.state.Password)) {

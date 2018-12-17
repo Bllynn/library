@@ -95,7 +95,7 @@ module.exports = {
   getBookDetails: (req, res) => {
     const dbInstance = req.app.get("db");
     dbInstance
-      .get_book_details(+req.params.id)
+      .get_book_details([+req.params.id])
       .then(book => {
         res.status(200).send(book);
       })
@@ -112,7 +112,7 @@ module.exports = {
     let id = req.params.id;
     const dbInstance = req.app.get("db");
     dbInstance
-      .delete_book(id)
+      .delete_book([id])
       .then(book => {
         res.sendStatus(200);
       })
@@ -124,10 +124,24 @@ module.exports = {
     let { id, title, author, genre, description, image } = req.body;
     const dbInstance = req.app.get("db");
     dbInstance
-      .edit_book(id, title, author, genre, image, description)
+      .edit_book([id, title, author, genre, image, description])
       .then(book => {
-        console.log(book)
+        console.log(book);
         res.status(200).send(book);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+  addBook: (req, res) => {
+    let { title, author, genre, description, image } = req.body;
+    console.log(req.body);
+    const dbInstance = req.app.get("db");
+    dbInstance
+      .add_book([title, author, genre, image, description])
+      .then(id => {
+        console.log(id);
+        res.status(200).send(id);
       })
       .catch(err => {
         console.log(err);
@@ -139,7 +153,7 @@ module.exports = {
     console.log("addtoCart TEST", book_id, user_id);
     const dbInstance = req.app.get("db");
     dbInstance
-      .check_cart(user_id, +book_id)
+      .check_cart([user_id, +book_id])
       .then(cart => {
         console.log(cart);
         if (cart.length < 1) {

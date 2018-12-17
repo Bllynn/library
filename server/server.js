@@ -22,23 +22,22 @@ app.use(
   })
 );
 
-app.use(express.json());
-
 app.use(bypass.byId(1));
 
-app.use("/assets", express.static("assets"));
+// app.use("/assets", express.static("assets"));
 app.use(express.static(__dirname + "/../build"));
 
 app.put("/auth/login", controller.login);
 //////////////////////////////request level middleware///////////////////
 app.put("/auth/register", bypass.checkUserName, controller.createUser);
-app.put("/edit/:id",controller.editBook);
+app.put("/edit/:id", controller.editBook);
+app.post("/add", controller.addBook);
 app.get("/api/user", controller.getUser);
 app.get("/books", controller.getBooks);
 app.get("/filter", controller.filterBooks);
 app.delete("/books/:id", controller.deleteBook);
 app.get("/books/:id", controller.getBookDetails);
-app.post("/cart/:id",controller.addtoCart);
+app.post("/cart/:id", controller.addtoCart);
 app.get("/auth/logout", controller.logout);
 
 const port = SERVER_PORT || 1337;

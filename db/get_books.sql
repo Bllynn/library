@@ -1,2 +1,3 @@
-SELECT * FROM books
-ORDER BY title ASC;
+SELECT *
+FROM books
+ORDER BY id ASC;

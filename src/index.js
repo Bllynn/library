@@ -1,5 +1,5 @@
-import ReactDOM from 'react-dom';
-// import './stylesheets/index.css';
-import routes from './routes';
+import ReactDOM from "react-dom";
+import "./stylesheets/main.css";
+import routes from "./routes";
 
-ReactDOM.render(routes, document.getElementById('root'));
+ReactDOM.render(routes, document.getElementById("root"));

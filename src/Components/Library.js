@@ -3,6 +3,7 @@ import axios from "axios";
 import swal from "sweetalert2";
 import Book from "./Book";
 import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
 
 class Browse extends Component {
   constructor() {
@@ -52,20 +53,19 @@ class Browse extends Component {
     console.log(this.state);
     let available = [];
     this.state.books.map(e => {
-      if ((this.state.inStock === false) && (this.state.outofStock === false)) {
+      if (this.state.inStock === false && this.state.outofStock === false) {
         if (e.in_stock === "Yes") {
           available.push(e);
         }
       }
-      if((this.state.inStock === true) && (this.state.outofStock === false)){
-        available.push(e)
+      if (this.state.inStock === true && this.state.outofStock === false) {
+        available.push(e);
       }
-      if((this.state.inStock === false) && (this.state.outofStock === true)){
-        available.push(e)
+      if (this.state.inStock === false && this.state.outofStock === true) {
+        available.push(e);
       }
-      if((this.state.inStock === true) && (this.state.outofStock === true)){
-        if(e.in_stock ==='No')
-        available.push(e)
+      if (this.state.inStock === true && this.state.outofStock === true) {
+        if (e.in_stock === "No") available.push(e);
       }
       return available;
     });
@@ -79,20 +79,19 @@ class Browse extends Component {
     console.log(this.state);
     let unavailable = [];
     this.state.books.map(e => {
-      if ((this.state.outofStock === false) && (this.state.inStock === false)) {
+      if (this.state.outofStock === false && this.state.inStock === false) {
         if (e.in_stock === "No") {
           unavailable.push(e);
         }
       }
-      if((this.state.outofStock === true) && (this.state.inStock === false)){
-        unavailable.push(e)
+      if (this.state.outofStock === true && this.state.inStock === false) {
+        unavailable.push(e);
       }
-      if((this.state.outofStock ===false)&& (this.state.inStock === true)){
-        unavailable.push(e)
+      if (this.state.outofStock === false && this.state.inStock === true) {
+        unavailable.push(e);
       }
-      if((this.state.outofStock === true)&& (this.state.inStock === true)){
-        if(e.in_stock ==='Yes')
-        unavailable.push(e)
+      if (this.state.outofStock === true && this.state.inStock === true) {
+        if (e.in_stock === "Yes") unavailable.push(e);
       }
       return unavailable;
     });
@@ -107,8 +106,8 @@ class Browse extends Component {
     axios.get(`/filter?genre=${value}`).then(response => {
       console.log(response.data);
       this.setState({
-        inStock:false,
-        outofStock:false,
+        inStock: false,
+        outofStock: false,
         books: response.data,
         filteredBooks: response.data
       });
@@ -174,7 +173,9 @@ class Browse extends Component {
           </div>
           {librarybooks}
           <div className="add-button">
-            <button>+Add New Book</button>
+            <Link to="/add">
+              <button>+Add New Book</button>
+            </Link>
           </div>
         </div>
       </div>

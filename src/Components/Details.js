@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import Navbar from "./Navbar";
 import swal from "sweetalert2";
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
       book: {},
-      cart:{}
+      cart: {}
     };
   }
   componentDidMount() {
@@ -30,15 +30,15 @@ class Details extends Component {
       });
   }
   addtoCart = () => {
-    let { id, in_stock,title } = this.state.book;
+    let { id, in_stock, title } = this.state.book;
     // console.log(id);
-    if(in_stock ==='No'){
+    if (in_stock === "No") {
       swal({
         title: `${title},copy #${id} not in stock`,
         text: "Book must be in stock to check it out",
         type: "warning",
         confirmButtonText: "OK",
-        showCancelButton:false
+        showCancelButton: false
       });
     }
     axios
@@ -54,10 +54,11 @@ class Details extends Component {
         if (res.status === 202) {
           swal({
             title: `Book copy #${id}, already in cart`,
-            text: "For multiple copies of same book, Please select the other copy from the library",
+            text:
+              "For multiple copies of same book, Please select the other copy from the library",
             type: "warning",
             confirmButtonText: "OK",
-            showCancelButton:false
+            showCancelButton: false
           });
         }
       })
@@ -66,7 +67,7 @@ class Details extends Component {
       });
   };
   /////clog/////
- 
+
   ////delete
   deleteBook = () => {
     let id = this.state.book.id;
@@ -77,22 +78,25 @@ class Details extends Component {
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!",
       cancelButtonText: "No, keep it"
-    }).then(result => {
-      if (result.value) {
-        axios.delete(`/books/${id}`).then(res => {
-          this.props.history.push("/library");
-        });
-        swal(
-          "Deleted!",
-          "Your Book has been removed from our inventory.",
-          "success"
-        );
-        // For more information about handling dismissals please visit
-        // https://sweetalert2.github.io/#handling-dismissals
-      } else if (result.dismiss === swal.DismissReason.cancel) {
-        swal("Cancelled", "Your imaginary book is safe :)", "error");
-      }
-    });
+    })
+      .then(result => {
+        if (result.value) {
+          axios.delete(`/books/${id}`).then(res => {});
+          swal(
+            "Deleted!",
+            "Your Book has been removed from our inventory.",
+            "success"
+          );
+          // For more information about handling dismissals please visit
+          // https://sweetalert2.github.io/#handling-dismissals
+        } else if (result.dismiss === swal.DismissReason.cancel) {
+          swal("Cancelled", "Your imaginary book is safe :)", "error");
+        }
+        this.props.history.push("/library");
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
   render() {
     console.log(this.state);
@@ -109,13 +113,13 @@ class Details extends Component {
         <div className="details-title">
           <article>
             <h1>Details</h1>
-            <p onClick={()=> this.props.history.push("/library")}> &lt;Back</p>
+            <p onClick={() => this.props.history.push("/library")}> &lt;Back</p>
           </article>
           <div className="test">
             <div className="details-book">
-            <Link to={`/Edit/${book.id}`}>
-              <button id="edit">Edit</button>
-            </Link>
+              <Link to={`/Edit/${book.id}`}>
+                <button id="edit">Edit</button>
+              </Link>
               <button id="delete" onClick={this.deleteBook}>
                 Delete
               </button>
