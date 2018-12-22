@@ -67,6 +67,13 @@ class Details extends Component {
       });
   };
   /////clog/////
+  test = value => {
+    if (value === "No") {
+      return { display: "none" };
+    } else {
+      return { display: "inherit" };
+    }
+  };
 
   ////delete
   deleteBook = () => {
@@ -100,12 +107,6 @@ class Details extends Component {
   };
   render() {
     console.log(this.state);
-    let styles = {
-      color: "white",
-      margin: "25px 10px",
-      height: "275px",
-      width: "auto"
-    };
     let book = this.state.book;
     return (
       <div className="details-main">
@@ -113,26 +114,15 @@ class Details extends Component {
         <div className="details-title">
           <article>
             <h1>Details</h1>
-            <p onClick={() => this.props.history.push("/library")}> &lt;Back</p>
+            <p id="back" onClick={() => this.props.history.push("/library")}>
+              {" "}
+              &lt;Back
+            </p>
           </article>
           <div className="test">
             <div className="details-book">
-              <Link to={`/Edit/${book.id}`}>
-                <button id="edit">Edit</button>
-              </Link>
-              <button id="delete" onClick={this.deleteBook}>
-                Delete
-              </button>
-              <button id="add" onClick={this.addtoCart}>
-                +Add to Cart
-              </button>
               <div className="details-img">
-                <img
-                  style={styles}
-                  id="details-img"
-                  src={book.image_url}
-                  alt="bookcover"
-                />
+                <img id="details-img" src={book.image_url} alt="bookcover" />
               </div>
               <div className="descriptions">
                 <h3 className="tagid">
@@ -152,7 +142,22 @@ class Details extends Component {
                   <p id="content">{book.in_stock}</p>
                 </h3>
                 <h3 className="tagid">Description:</h3>
-                <p id="content">{book.description}</p>
+                <p id="content-scroll">{book.description}</p>
+              </div>
+              <div class="edit-delete-add">
+                <Link to={`/Edit/${book.id}`}>
+                  <button id="edit">Edit</button>
+                </Link>
+                <button id="delete" onClick={this.deleteBook}>
+                  Delete
+                </button>
+                <button
+                  id="add"
+                  onClick={this.addtoCart}
+                  style={this.test(book.in_stock)}
+                >
+                  +Add to Cart
+                </button>
               </div>
             </div>
           </div>

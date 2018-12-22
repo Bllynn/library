@@ -272,6 +272,11 @@ article > h1 {
   font-size: 50px;
   padding-top: 15px;
 }
+article > p {
+  position: relative;
+  left: 20px;
+  font-family: "Alegreya SC", serif;
+}
 article > p:hover {
   cursor: pointer;
 }
@@ -290,6 +295,12 @@ article > p:hover {
   width: 85%;
   border-radius: 5px;
   overflow: hidden;
+}
+.details-img {
+  width: 35%;
+}
+img {
+  width: 100%;
 }
 #edit {
   position: absolute;
@@ -310,7 +321,7 @@ article > p:hover {
   flex-direction: column;
   margin: 5px -15px 15px 10px;
   padding-right: 205px;
-  overflow-y: scroll;
+  overflow-y: hidden;
   width: 65%;
   height: 100%;
 }

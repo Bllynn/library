@@ -155,7 +155,7 @@ module.exports = {
     dbInstance
       .check_cart([user_id, +book_id])
       .then(cart => {
-        console.log(cart);
+        console.log("check_cart", cart.length);
         if (cart.length < 1) {
           dbInstance
             .add_to_cart([user_id, book_id])
@@ -168,7 +168,7 @@ module.exports = {
         if (cart.length === 1 && cart[0].book_id === Number(book_id)) {
           console.log(cart.length);
 
-          res.sendStatus(202);
+          res.sendStatus(202); //status is checked on front end//
         }
       })
       .catch(err => {
