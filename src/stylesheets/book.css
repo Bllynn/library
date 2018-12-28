@@ -1,51 +1,51 @@
 /* html{
     background-color: #4E1E29;
 } */
-.book-main{
-    background-color:#4E1E29;
-    border-radius:10px;
-    background-color: #FBFFE6;
-    width:69%;
-    height:20%;
-    margin:15px auto;
+.book-main {
+  background-color: #4e1e29;
+  border-radius: 10px;
+  background-color: #fbffe6;
+  width: 69%;
+  height: 20%;
+  margin: 15px auto;
 }
-.book-information{
-    display:flex;
-    justify-content: center;
+.book-information {
+  display: flex;
+  justify-content: center;
 }
-.book-cover{
-    margin:20px 30px 20px 15px;
-    height:125px;
-    width:auto;
+.book-cover {
+  margin: 20px 30px 20px 15px;
+  height: 125px;
+  width: auto;
 }
 
-.book-title-author{
-    height:165px;
-    width:604px;
-    display:flex;
-    flex-direction:column;
-    justify-content: center;
-    align-content:space-between;
-    font-family: 'Open Sans', sans-serif;
-    padding:15px;
+.book-title-author {
+  height: 165px;
+  width: 604px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: space-between;
+  font-family: "Open Sans", sans-serif;
+  padding: 15px;
 }
-.book-title{
-    font-family: 'Open Sans', sans-serif;
-    font-size:30px;
-    font-weight:600;
+.book-title {
+  font-family: "Open Sans", sans-serif;
+  font-size: 30px;
+  font-weight: 600;
 }
-.book-author{
-    display:relative;
+.book-author {
+  display: relative;
 }
-.book-stock-details{
-    display:flex;
-    flex-direction:column;
-    justify-content: space-between;
-    align-content: flex-end;
-    font-size:20px;
-    padding:15px;
+.book-stock-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: flex-end;
+  font-size: 20px;
+  padding: 15px;
 }
-#book-stock{
-    padding:0 10px;
-    font-family:'Open Sans',sans-serif;
+#book-stock {
+  padding: 0 10px;
+  font-family: "Open Sans", sans-serif;
 }

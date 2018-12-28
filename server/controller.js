@@ -174,5 +174,18 @@ module.exports = {
       .catch(err => {
         console.log("2222222", err);
       });
+  },
+  getCart: (req, res) => {
+    let user_id = req.session.user;
+    console.log("GETCART", user_id);
+    const dbInstance = req.app.get("db");
+    dbInstance
+      .get_cart([+user_id])
+      .then(cart => {
+        res.status(200).send(cart);
+      })
+      .catch(err => {
+        console.log("GETCART", err, user_id);
+      });
   }
 };

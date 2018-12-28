@@ -38,6 +38,7 @@ app.get("/filter", controller.filterBooks);
 app.delete("/books/:id", controller.deleteBook);
 app.get("/books/:id", controller.getBookDetails);
 app.post("/cart/:id", controller.addtoCart);
+app.get("/cart", controller.getCart);
 app.get("/auth/logout", controller.logout);
 
 const port = SERVER_PORT || 1337;

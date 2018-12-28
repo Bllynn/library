@@ -744,3 +744,41 @@ input {
   display: flex;
   align-content: space-around;
 }
+/*////////////////////////CART//////////////////////////////*/
+.cart-main {
+  justify-content: center;
+  background-color: #4e1e29;
+  height: 100%;
+  width: 100%;
+}
+.cart-title {
+  color: #4e1e29;
+  padding: 10px;
+  position: relative;
+  margin: 150px auto auto auto;
+  background-color: #c6b38e;
+  height: 100%;
+  width: 80%;
+  border-radius: 5px;
+}
+article > h1 {
+  position: relative;
+  display: inline-flex;
+  left: 20px;
+  font-family: "Alegreya SC", serif;
+  font-size: 50px;
+  padding-top: 15px;
+}
+article > p {
+  position: relative;
+  left: 20px;
+  font-family: "Alegreya SC", serif;
+}
+article > p:hover {
+  cursor: pointer;
+}
+.cart-test {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}

@@ -1,5 +1,5 @@
 UPDATE books
-SET in_stock = 'No',
+SET
 user_id = $1
 WHERE id = $2;
 INSERT INTO librarycart

@@ -104,7 +104,7 @@ class Details extends Component {
       });
   };
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     let book = this.state.book;
     return (
       <div className="details-main">
@@ -142,7 +142,7 @@ class Details extends Component {
                 <h3 className="tagid">Description:</h3>
                 <p id="content-scroll">{book.description}</p>
               </div>
-              <div class="edit-delete">
+              <div className="edit-delete">
                 <Link to={`/Edit/${book.id}`}>
                   <button id="edit">Edit</button>
                 </Link>
