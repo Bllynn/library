@@ -57,38 +57,33 @@ class Edit extends Component {
       <div className="edit-main">
         <Navbar {...this.props} />
         <div className="edit-title">
-          <h1>Edit</h1>
-          <p
-            className="edit-goBack"
-            onClick={() => this.props.history.goBack()}
-          >
-            {" "}
-            &lt;Back
-          </p>
+          <artcle>
+            <h1>Edit</h1>
+            <p id="back" onClick={() => this.props.history.goBack()}>
+              {" "}
+              &lt;Back
+            </p>
+          </artcle>
           <div className="edit-card">
             <section className="edit-leftcard">
-            <article className='img-input'>
-              <p>Image url</p>
-              <input
-                id="edit-urlinput"
-                type="text"
-                value={this.state.image}
-                name="image"
-                onChange={this.handleChange}
-              />
-
-            </article>
-              <article className='img-preview'>
-                <p>
-                  Image Preview
-                </p>
-                  <img
-                    className="edit-img"
-                    src={this.state.image}
-                    alt="book cover"
-                  />
+              <article className="img-input">
+                <p>Image url</p>
+                <input
+                  id="edit-urlinput"
+                  type="text"
+                  value={this.state.image}
+                  name="image"
+                  onChange={this.handleChange}
+                />
               </article>
-                  
+              <article className="img-preview">
+                <p>Image Preview</p>
+                <img
+                  className="edit-img"
+                  src={this.state.image}
+                  alt="book cover"
+                />
+              </article>
             </section>
             <section className="edit-middlecard">
               <p>Title</p>
@@ -133,7 +128,9 @@ class Edit extends Component {
                 id="edit-description"
                 onChange={this.handleChange}
               />
-              <button id='save-button'onClick={this.updateBook}>Save Book</button>
+              <button id="save-button" onClick={this.updateBook}>
+                Save Book
+              </button>
             </section>
           </div>
         </div>

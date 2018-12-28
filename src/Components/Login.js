@@ -52,8 +52,8 @@ class Login extends Component {
       })
       .catch(err => {
         swal({
-          title: "Something went wrong",
-          text: `${err}`,
+          title: "Invalid",
+          text: `Username or password is incorrect`,
           type: "error",
           confirmButtonText: "OK",
           showCancelButton: false
@@ -99,6 +99,7 @@ class Login extends Component {
             confirmButtonText: "OK",
             showCancelButton: false
           });
+          console.log(err);
         });
     }
   };
@@ -116,7 +117,7 @@ class Login extends Component {
           <h1 className="title">Book Exchange</h1>
           <div className="login-container">
             <div className="input-container">
-              <span className="inputs">
+              <form className="inputs">
                 Username
                 <input
                   type="text"
@@ -125,7 +126,7 @@ class Login extends Component {
                   onChange={e => this.setState({ Username: e.target.value })}
                   autoFocus={true}
                 />
-              </span>
+              </form>
               <span className="inputs">
                 Password
                 <input

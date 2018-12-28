@@ -55,7 +55,7 @@ class Details extends Component {
           swal({
             title: `Book copy #${id}, already in cart`,
             text:
-              "For multiple copies of same book, Please select the other copy from the library",
+              "For multiple copies of same book, Please select a different copy from the library",
             type: "warning",
             confirmButtonText: "OK",
             showCancelButton: false
@@ -68,10 +68,8 @@ class Details extends Component {
   };
   /////clog/////
   test = value => {
-    if (value === "No") {
-      return { display: "none" };
-    } else {
-      return { display: "inherit" };
+    if (value === "Yes") {
+      return { visibility: "visible" };
     }
   };
 
@@ -144,21 +142,21 @@ class Details extends Component {
                 <h3 className="tagid">Description:</h3>
                 <p id="content-scroll">{book.description}</p>
               </div>
-              <div class="edit-delete-add">
+              <div class="edit-delete">
                 <Link to={`/Edit/${book.id}`}>
                   <button id="edit">Edit</button>
                 </Link>
                 <button id="delete" onClick={this.deleteBook}>
                   Delete
                 </button>
-                <button
-                  id="add"
-                  onClick={this.addtoCart}
-                  style={this.test(book.in_stock)}
-                >
-                  +Add to Cart
-                </button>
               </div>
+              <button
+                id="add"
+                onClick={this.addtoCart}
+                style={this.test(book.in_stock)}
+              >
+                +Add to Cart
+              </button>
             </div>
           </div>
         </div>

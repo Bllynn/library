@@ -15,11 +15,11 @@ module.exports = {
   login: (req, res) => {
     const dbInstance = req.app.get("db");
     const { Username, Password } = req.body;
-    console.log(Username, Password);
+    console.log(22222, Username, Password);
     dbInstance
       .login([Username, Password])
       .then(user => {
-        console.log(user);
+        // console.log(user);
         if (user.length >= 1) {
           req.session.user = user[0].id;
           res.status(200).send(user);
@@ -166,7 +166,7 @@ module.exports = {
           /////////////trying to get it to add only 1 copy of each book to librarycart/////
         }
         if (cart.length === 1 && cart[0].book_id === Number(book_id)) {
-          console.log(cart.length);
+          console.log("duplicate copy", cart.length);
 
           res.sendStatus(202); //status is checked on front end//
         }

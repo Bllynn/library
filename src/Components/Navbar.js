@@ -26,7 +26,9 @@ class Navbar extends Component {
           <li className="list-items">
             <Link to="/library">Browse</Link>
           </li>
-          <li className="list-items">Cart</li>
+          <li className="list-items">
+            <Link to="/library">Browse</Link>
+          </li>
           <li className="list-items">My Shelf</li>
         </ul>
         <p className="logout" onClick={this.logout}>
